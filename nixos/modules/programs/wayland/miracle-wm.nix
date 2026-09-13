@@ -27,6 +27,12 @@ in
 
         # To make the miracle-wm session available if a display manager like SDDM is enabled:
         services.displayManager.sessionPackages = [ pkgs.miracle-wm ];
+
+        xdg.portal.config.miracle-wm = {
+          default = [ "gtk" ];
+          "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+          "org.freedesktop.impl.portal.Screenshot" = "wlr";
+        };
       }
 
       (import ./wayland-session.nix {
@@ -34,8 +40,8 @@ in
         # Hardcoded path in Mir, not really possible to disable
         enableXWayland = true;
         # No portal support yet: https://github.com/mattkae/miracle-wm/issues/164
-        enableWlrPortal = false;
-        enableGtkPortal = false;
+        # enableWlrPortal = false;
+        # enableGtkPortal = false;
       })
     ]
   );
